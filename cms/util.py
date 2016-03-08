@@ -61,7 +61,7 @@ def mkdir(path):
             os.chown(path, -1, cmsuser_gid)
         except OSError as error:
             os.rmdir(path)
-            raise error
+            return False
     except OSError as error:
         if error.errno != errno.EEXIST:
             return False
