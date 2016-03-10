@@ -244,7 +244,7 @@ class SecuredGrader(TaskType):
             job.time_limit,
             0,
             allow_dirs=oracle_allow_dirs,
-            writable_files=["output.txt"],
+            writable_files=[output_filename],
             stdin_redirect=input_filename,
             stdout_redirect=output_filename)
 
