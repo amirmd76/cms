@@ -211,14 +211,6 @@ class SecuredGrader(TaskType):
         os.chmod(fifo_dir, 0o755)
         os.chmod(fifo_in, 0o666)
         os.chmod(fifo_out, 0o666)
-        import stat
-        def permissions_to_unix_name(st):
-            is_dir = 'd' if stat.S_ISDIR(st.st_mode) else '-'
-            dic = {'7':'rwx', '6' :'rw-', '5' : 'r-x', '4':'r--', '0': '---'}
-            perm = str(oct(st.st_mode)[-3:])
-            return is_dir + ''.join(dic.get(x,x) for x in perm)
-        logger.warning(permissions_to_unix_name(os.stat(fifo_out)))
-        logger.warning(fifo_out)
         input_filename = "input.txt"
         output_filename = "output.txt"
 
