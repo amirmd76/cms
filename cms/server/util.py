@@ -132,7 +132,10 @@ def compute_actual_phase(timestamp, contest_start, contest_stop, per_user_time,
     else:
         if per_user_time is None:
             # "Traditional" contest.
-            intended_start = contest_start
+            if starting_time is not None:
+                intended_start = starting_time
+            else:
+                intended_start = contest_start
             intended_stop = contest_stop
         else:
             # "USACO-like" contest, and we already know when the user
@@ -147,7 +150,7 @@ def compute_actual_phase(timestamp, contest_start, contest_stop, per_user_time,
         actual_start = intended_start + delay_time
         actual_stop = intended_stop + delay_time + extra_time
 
-        assert contest_start <= actual_start <= actual_stop
+        assert actual_start <= actual_stop
 
         if actual_start <= timestamp <= actual_stop:
             actual_phase = 0
